@@ -15,9 +15,24 @@ public class CameraControls : MonoBehaviour
     public float height = 30f;     // Height above the vehicle
     public float smoothSpeed = 0.125f;  // Smoothing factor for movement
 
+    //refrence each car script
+    private Vehicle1Movement vehicle1Movement;
+    private Vehicle2Movement vehicle2Movement;
+    private Vehicle3Movement vehicle3Movement;
+
     void Start()
     {
         currentFollowing = vehicle1;
+
+        //get refrences for each script
+        vehicle1Movement = vehicle1.GetComponent<Vehicle1Movement>();
+        vehicle2Movement = vehicle2.GetComponent<Vehicle2Movement>();
+        vehicle3Movement = vehicle3.GetComponent<Vehicle3Movement>();
+
+        //enanble the correct script
+        vehicle1Movement.enabled = true;
+        vehicle2Movement.enabled = false;
+        vehicle3Movement.enabled = false;
     }
 
     void LateUpdate()
@@ -47,14 +62,23 @@ public class CameraControls : MonoBehaviour
             if (currentFollowing == vehicle1)
             {
                 currentFollowing = vehicle2;
+                vehicle1Movement.enabled = false;
+                vehicle2Movement.enabled = true;
+                vehicle3Movement.enabled = false;
             }
             else if (currentFollowing == vehicle2)
             {
                 currentFollowing = vehicle3;
+                vehicle1Movement.enabled = false;
+                vehicle2Movement.enabled = false;
+                vehicle3Movement.enabled = true;
             }
             else if (currentFollowing == vehicle3)
             {
                 currentFollowing = vehicle1;
+                vehicle1Movement.enabled = true;
+                vehicle2Movement.enabled = false;
+                vehicle3Movement.enabled = false;
             }
         }
     }
