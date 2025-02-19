@@ -155,6 +155,53 @@ Transform:
   m_Father: {fileID: 2043148791}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &250871514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 250871515}
+  - component: {fileID: 250871516}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &250871515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250871514}
+  m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.57192993, z: 6.607019}
+  m_LocalScale: {x: 0.35087723, y: 0.35087723, z: 0.35087723}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 549149204}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &250871516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250871514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb856ca08b132fd4cbbe804b83b3e09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2974021536467595444, guid: 0a6f06524dce46d459f6d574221fa8d1, type: 3}
+  projectileLifeSpan: 5
+  speed: 20
 --- !u!1001 &549149196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,6 +293,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.0665555, y: 2.3909688, z: 13.760331}
   m_Center: {x: 0, y: 0.000000059604645, z: -0.00000047683716}
+--- !u!4 &549149204 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2012395708359537393, guid: 85ffcb82c0c5a3e428f731db821f0325, type: 3}
+  m_PrefabInstance: {fileID: 549149196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &549149205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +873,7 @@ MonoBehaviour:
   vehicle1: {fileID: 2072053161}
   vehicle2: {fileID: 549149197}
   vehicle3: {fileID: 1909205377}
+  weapon: {fileID: 250871514}
   distance: 65
   height: 30
   smoothSpeed: 0.125

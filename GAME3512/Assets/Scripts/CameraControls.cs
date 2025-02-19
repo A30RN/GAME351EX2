@@ -10,6 +10,9 @@ public class CameraControls : MonoBehaviour
     public GameObject vehicle3;
     private GameObject currentFollowing;
 
+    //refrence the weapon gameobject
+    public GameObject weapon;
+
     [Header("Camera Settings")]
     public float distance = 65f;   // Distance behind the vehicle
     public float height = 30f;     // Height above the vehicle
@@ -20,6 +23,9 @@ public class CameraControls : MonoBehaviour
     private Vehicle2Movement vehicle2Movement;
     private Vehicle3Movement vehicle3Movement;
 
+    //refrence weapon script
+    private WeaponControl weaponControl;
+
     void Start()
     {
         currentFollowing = vehicle1;
@@ -28,11 +34,13 @@ public class CameraControls : MonoBehaviour
         vehicle1Movement = vehicle1.GetComponent<Vehicle1Movement>();
         vehicle2Movement = vehicle2.GetComponent<Vehicle2Movement>();
         vehicle3Movement = vehicle3.GetComponent<Vehicle3Movement>();
+        weaponControl = weapon.GetComponentInChildren<WeaponControl>();
 
         //enanble the correct script
         vehicle1Movement.enabled = true;
         vehicle2Movement.enabled = false;
         vehicle3Movement.enabled = false;
+        weaponControl.enabled = false;
     }
 
     void LateUpdate()
@@ -65,6 +73,7 @@ public class CameraControls : MonoBehaviour
                 vehicle1Movement.enabled = false;
                 vehicle2Movement.enabled = true;
                 vehicle3Movement.enabled = false;
+                weaponControl.enabled = true;
             }
             else if (currentFollowing == vehicle2)
             {
@@ -72,6 +81,7 @@ public class CameraControls : MonoBehaviour
                 vehicle1Movement.enabled = false;
                 vehicle2Movement.enabled = false;
                 vehicle3Movement.enabled = true;
+                weaponControl.enabled = false;
             }
             else if (currentFollowing == vehicle3)
             {
@@ -79,6 +89,7 @@ public class CameraControls : MonoBehaviour
                 vehicle1Movement.enabled = true;
                 vehicle2Movement.enabled = false;
                 vehicle3Movement.enabled = false;
+                weaponControl.enabled = false;
             }
         }
     }
