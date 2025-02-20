@@ -6,7 +6,7 @@ public class WeaponControl : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public float projectileLifeSpan = 5f;
-    public float speed = 20f;
+    public float speed = 250f;
 
     public void FireProjectile()
     {
