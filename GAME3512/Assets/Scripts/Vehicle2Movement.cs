@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Vehicle2Movement : MonoBehaviour
@@ -10,10 +11,23 @@ public class Vehicle2Movement : MonoBehaviour
     private float horizontalInput;
     private float fowardInput;
 
+    // Audio
+    private Vector3 lastPosition;
+    private AudioSource engineSound;
+
+    public float minVolume = 0.2f;
+    public float maxVolume = 1.0f;
+    public float volumeChangeSpeed = 2.0f;
+
+    public float minPitch = 0.3f;
+    public float maxPitch = 0.8f;
+    public float pitchChangeSpeed = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        lastPosition = transform.position;
+        engineSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +42,8 @@ public class Vehicle2Movement : MonoBehaviour
         transform.Rotate(0, 1 * turnSpeed * horizontalInput * Time.deltaTime, 0);
 
         FloatAboveTerrain();
+
+        AdjustEngineSound();
     }
 
     void FloatAboveTerrain()
@@ -37,5 +53,19 @@ public class Vehicle2Movement : MonoBehaviour
         float targetY = terrainHeight + floatHeight;
 
         transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
+    }
+
+    void AdjustEngineSound()
+    {
+        if (engineSound == null) return;
+
+        bool isMoving = transform.position != lastPosition;
+        float targetVolume = isMoving ? maxVolume : minVolume;
+        float targetPitch = isMoving ? maxPitch : minPitch;
+
+        engineSound.volume = Mathf.Lerp(engineSound.volume, targetVolume, Time.deltaTime * volumeChangeSpeed);
+        engineSound.pitch = Mathf.Lerp(engineSound.pitch, targetPitch, Time.deltaTime * pitchChangeSpeed);
+
+        lastPosition = transform.position;
     }
 }

@@ -26,6 +26,13 @@ public class CameraControls : MonoBehaviour
     //refrence weapon script
     private WeaponControl weaponControl;
 
+    //refrence Audio Sources
+    private AudioSource engineSound;
+
+    private AudioSource vehicle1Sound;
+    private AudioSource vehicle2Sound;
+    private AudioSource vehicle3Sound;
+
     void Start()
     {
         currentFollowing = vehicle1;
@@ -41,9 +48,20 @@ public class CameraControls : MonoBehaviour
         vehicle2Movement.enabled = false;
         vehicle3Movement.enabled = false;
         weaponControl.enabled = false;
+
+        //refrence the sounds components
+        vehicle1Sound = vehicle1.GetComponent<AudioSource>();
+        vehicle2Sound = vehicle2.GetComponent<AudioSource>();
+        vehicle3Sound = vehicle3.GetComponent<AudioSource>();
+
+        //enable the correct audio
+        vehicle1Sound.Play();
+        vehicle2Sound.Stop();
+        vehicle3Sound.Stop();
+
     }
 
-    void LateUpdate()
+void LateUpdate()
     {
         // Calculate desired position:
         //   - Start at the vehicle's position.
@@ -74,6 +92,10 @@ public class CameraControls : MonoBehaviour
                 vehicle2Movement.enabled = true;
                 vehicle3Movement.enabled = false;
                 weaponControl.enabled = true;
+
+                vehicle1Sound.Stop();
+                vehicle2Sound.Play();
+                vehicle3Sound.Stop();
             }
             else if (currentFollowing == vehicle2)
             {
@@ -82,6 +104,10 @@ public class CameraControls : MonoBehaviour
                 vehicle2Movement.enabled = false;
                 vehicle3Movement.enabled = true;
                 weaponControl.enabled = false;
+
+                vehicle1Sound.Stop();
+                vehicle2Sound.Stop();
+                vehicle3Sound.Play();
             }
             else if (currentFollowing == vehicle3)
             {
@@ -90,6 +116,10 @@ public class CameraControls : MonoBehaviour
                 vehicle2Movement.enabled = false;
                 vehicle3Movement.enabled = false;
                 weaponControl.enabled = false;
+
+                vehicle1Sound.Play();
+                vehicle2Sound.Stop();
+                vehicle3Sound.Stop();
             }
         }
     }
